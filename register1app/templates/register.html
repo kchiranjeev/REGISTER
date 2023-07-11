@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color:lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        form {
+          background-color:grey;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        form div {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        form input {
+            padding: 5px;
+        }
+        
+        form input[type="radio"],
+        form input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        
+        form button {
+            padding: 10px 20px;
+            background-color: lightblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        form button:hover {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {% load static %}
+        <div>
+            <label for="Firstname">Firstname:</label>
+            <input type="text" id="Firstname" name="Firstname" pattern="[A-Za-z]+" required />
+        </div>
+        <div>
+            <label for="Lastname">Lastname:</label>
+            <input type="text" id="Lastname" name="Lastname" pattern="[A-Za-z]+" required />
+        </div>
+        <div>
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="male" checked required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other" required>
+            <label for="other">Other</label>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ formData.email }}" required>
+        </div>
+        <div>
+            <label for="MobailNumber">MobailNumber:</label>
+            <input type="text" id="MobailNumber" name="MobailNumber" pattern="[0-9]{1}[0-9]{9}" value="{{ formData.MobailNumber }}" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="{{ formData.password }}" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
